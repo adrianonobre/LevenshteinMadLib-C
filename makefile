@@ -6,10 +6,10 @@ ODIR = obj
 SRC_DIR = src
 BUILD_DIR = build
 
-_DEPS = levenshtein_calculator.h
+_DEPS = levenshtein_calculator.h word_rolodex.h strsplit.h array.h
 DEPS = $(pathsubst %,$(IDIR)/%,$(_DEPS))
 
-_OBJ = main.o levenshtein_calculator.o
+_OBJ = main.o levenshtein_calculator.o word_rolodex.o strsplit.o array.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 $(ODIR)/%.o: $(SRC_DIR)/%.c $(DEPS)
@@ -21,4 +21,4 @@ madlib: $(OBJ)
 .PHONY: clean
 
 clean:
-	rm -f $(ODIR)/*.o *~ $(IDIR)/*~ $(BUILD_DIR)/*	
+	rm -f $(ODIR)/*.o *~ $(IDIR)/*~ $(BUILD_DIR)/madlib
