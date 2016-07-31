@@ -1,22 +1,23 @@
 #define _GNU_SOURCE
 #include <stdio.h>
 
-#include "../include/levenshtein_calculator.h"
-#include "../include/word_rolodex.h"
-#include "../include/strsplit.h"
+#include "../include/str_list.h"
+#include "../include/word_file_loader.h"
+#include "../include/levenshtein_madlib.h"
 
 int main() {
-	printf("%d\n", get_distance(" mob", "mob"));
-	
-	load_from_file("W");
+    struct str_list dict_word_list;
 
-    roll();
+	init(&dict_word_list, 100000);
 
-//    int i;
-//    for (i = 0; i < 200000; i++) {
-//	    printf("%d - %s\n", i, get_next_word());
-//    }
+	load_lines_from_file("W", &dict_word_list);
+
+    char *sentence = "This is a  sentence.";
+    int distance = 3;
+
+    printf("%s\n", transform(sentence, distance, &dict_word_list));
 	
-	split("This is a  sentence.", " .-!,?\"'");
+	free_list(&dict_word_list);
+	
 	return 0;
 }

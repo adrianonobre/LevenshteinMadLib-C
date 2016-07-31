@@ -3,35 +3,27 @@
 #include <stddef.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include "../include/array.h"
+#include "../include/str_list.h"
 
-char* split(char *str, char *delim) {
-	char *words[10] = NULL;
+void split(char *str, char *delim, struct str_list *out_word_list) {
 	char *running = NULL;
 	char *token = NULL;
-	Array words2;
-	
-	initArray(&words2, 7);
-	
-	running = strdupa(str);
+	char *word = NULL;
 
-    int wordCount = 0;
+	running = strdupa(str);
 	while ((token = strsep(&running, delim)) != NULL) {
 	    if (strlen(token) > 0) {
-	        insertArray(&words2, token);
-	        words[wordCount++] = token;
+	        word = malloc(strlen(token) + 1);
+    	    strcpy(word, token);
+	        add_str(out_word_list, word);
 	    }
 	}
 
-   	printf("%d\n", wordCount);
-   	int i;
-   	for (i = 0; i < wordCount; i++) {
-   	    printf("-%s-\n", words[i]);
-   	}
-
+	
+    int i;
+    for(i = 0; i < size(out_word_list); i++) {
+        //printf("%s ", get_str(out_word_list, i));
+    }
+	
     free(running);
-
-    freeArray(&words2);
-
-    return words[0];
 }

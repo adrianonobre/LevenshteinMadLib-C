@@ -2,23 +2,11 @@
 #include <stddef.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include "../include/str_list.h"
 
-struct list;
-
-void init(struct list *p_list, int initial_capacity);
-void add_str(struct list *p_list, char *str);
-char *get_str(struct list *p_list, int pos);
-int size(struct list *p_list);
-void free_list(struct list *p_list);
-
-struct list {
-    char **data;
-    int capacity;
-    int last_idx;
-};
-
+/*
 int main() {
-    struct list word_list;
+    struct str_list word_list;
 
     init(&word_list, 2);
     add_str(&word_list, "oi");
@@ -36,6 +24,17 @@ int main() {
    
     return 0;
 }
+*/
+void vrfy_bounds(struct str_list *p_list, int pos) {
+    if (pos < 0) {
+        printf("Index out of bounds: index [%d] must be non-negative\n", pos);
+        exit(1);
+    }
+    if (pos > p_list->last_idx) {
+        printf("Index out of bounds: %d > %d\n", pos, p_list->last_idx);
+        exit(1);
+    }
+}
 
 void vrfy_alloc(void *p, char *caller) {
     if (p == NULL) {
@@ -44,14 +43,14 @@ void vrfy_alloc(void *p, char *caller) {
     }
 }
 
-void init(struct list *p_list, int initial_capacity) {
+void init(struct str_list *p_list, int initial_capacity) {
     p_list->capacity = initial_capacity;
     p_list->last_idx = -1;
     p_list->data = malloc(sizeof(char *) * p_list->capacity);
     vrfy_alloc(p_list->data, "init");
 }
 
-void add_str(struct list *p_list, char *str) {
+void add_str(struct str_list *p_list, char *str) {
     if (p_list->last_idx + 1 == p_list->capacity) {
         p_list->capacity *= 2;
         p_list->data = realloc(p_list->data, sizeof(char *) * p_list->capacity);
@@ -63,27 +62,24 @@ void add_str(struct list *p_list, char *str) {
     p_list->last_idx++;
 }
 
-char *get_str(struct list *p_list, int pos) {
-    if (pos < 0) {
-        printf("Index out of bounds: index [%d] must be non-negative\n", pos);
-        exit(1);
-    }
-    if (pos > p_list->last_idx) {
-        printf("Index out of bounds: %d > %d\n", pos, p_list->last_idx);
-        exit(1);
-    }
+char *get_str(struct str_list *p_list, int pos) {
+    vrfy_bounds(p_list, pos);
     return *(p_list->data + pos);
 }
 
-int size(struct list *p_list) {
+void change_str(struct str_list *p_list, int pos, char *new_str) {
+    vrfy_bounds(p_list, pos);
+    *(p_list->data + pos) = new_str;
+}
+
+int size(struct str_list *p_list) {
     return p_list->last_idx + 1;
 }
 
-void free_list(struct list *p_list) {
+void free_list(struct str_list *p_list) {
     free(p_list->data);
     p_list->capacity = 0;
     p_list->last_idx = -1;
     p_list->data = NULL;
 }
-
 
