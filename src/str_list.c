@@ -4,19 +4,18 @@
 #include <stdio.h>
 #include "../include/str_list.h"
 
-
-void increase_capacity_if_needed(struct str_list *p_list);
-void vrfy_bounds(struct str_list *p_list, int pos);
+void increase_capacity_if_needed(str_list *p_list);
+void vrfy_bounds(str_list *p_list, int pos);
 void vrfy_alloc(void *p, char *caller);
 
-void init(struct str_list *p_list, int initial_capacity) {
+void init(str_list *p_list, int initial_capacity) {
     p_list->capacity = initial_capacity;
     p_list->last_idx = -1;
     p_list->data = malloc(sizeof(char *) * p_list->capacity);
     vrfy_alloc(p_list->data, "init");
 }
 
-void add_str(struct str_list *p_list, char *str) {
+void add_str(str_list *p_list, char *str) {
     increase_capacity_if_needed(p_list);
 
     char *str_copy;
@@ -28,12 +27,12 @@ void add_str(struct str_list *p_list, char *str) {
     p_list->last_idx++;
 }
 
-char *get_str(struct str_list *p_list, int pos) {
+char *get_str(str_list *p_list, int pos) {
     vrfy_bounds(p_list, pos);
     return *(p_list->data + pos);
 }
 
-void change_str(struct str_list *p_list, int pos, char *new_str) {
+void change_str(str_list *p_list, int pos, char *new_str) {
     vrfy_bounds(p_list, pos);
 
     char *str_copy;
@@ -44,11 +43,11 @@ void change_str(struct str_list *p_list, int pos, char *new_str) {
     *(p_list->data + pos) = str_copy;
 }
 
-int size(struct str_list *p_list) {
+int size(str_list *p_list) {
     return p_list->last_idx + 1;
 }
 
-void free_list(struct str_list *p_list) {
+void free_list(str_list *p_list) {
     char *str;
     int i;
     for (i = 0; i < size(p_list); i++) {
@@ -62,7 +61,7 @@ void free_list(struct str_list *p_list) {
     p_list->data = NULL;
 }
 
-void increase_capacity_if_needed(struct str_list *p_list) {
+void increase_capacity_if_needed(str_list *p_list) {
     if (p_list->last_idx + 1 == p_list->capacity) {
         p_list->capacity *= 2;
         p_list->data = realloc(p_list->data, sizeof(char *) * p_list->capacity);
@@ -71,7 +70,7 @@ void increase_capacity_if_needed(struct str_list *p_list) {
     }
 }
 
-void vrfy_bounds(struct str_list *p_list, int pos) {
+void vrfy_bounds(str_list *p_list, int pos) {
     if (pos < 0) {
         printf("Index out of bounds: index [%d] must be non-negative\n", pos);
         exit(1);

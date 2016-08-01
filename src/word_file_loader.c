@@ -6,7 +6,7 @@
 
 #define MAX_WORD_LENGTH 50
 
-void load_lines_from_file(char* fileName, struct str_list *out_line_list) {
+void load_lines_from_file(char* fileName, str_list *out_line_list) {
     char str[MAX_WORD_LENGTH];
     FILE *fp;
     

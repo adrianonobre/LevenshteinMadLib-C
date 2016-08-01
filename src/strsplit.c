@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include "../include/str_list.h"
 
-void split(char *str, char *delim, struct str_list *out_word_list) {
+void split(char *str, char *delim, str_list *out_word_list) {
 	char *running = NULL;
 	char *token = NULL;
 	char *word = NULL;
