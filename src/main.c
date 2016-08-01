@@ -6,6 +6,8 @@
 #include "../include/levenshtein_madlib.h"
 
 int main() {
+    show_title();
+
     struct str_list dict_word_list;
 
 	init(&dict_word_list, 100000);
