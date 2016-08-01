@@ -66,7 +66,7 @@ void increase_capacity_if_needed(str_list *p_list) {
         p_list->capacity *= 2;
         p_list->data = realloc(p_list->data, sizeof(char *) * p_list->capacity);
         vrfy_alloc(p_list->data, "add_str");
-        printf("Increased capacity to %d\n", p_list->capacity);
+        //printf("Increased capacity to %d\n", p_list->capacity);
     }
 }
 
