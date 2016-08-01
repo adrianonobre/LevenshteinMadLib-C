@@ -16,7 +16,7 @@ int main() {
     int distance = 3;
 
     printf("%s\n", transform(sentence, distance, &dict_word_list));
-	
+
 	free_list(&dict_word_list);
 	
 	return 0;

@@ -6,25 +6,11 @@
 #include "../include/str_list.h"
 #include "../include/levenshtein_calculator.h"
 #include "../include/strsplit.h"
+#include "../include/levenshtein_madlib.h"
 
-int get_random_natural_number(int upper_bound_exclusive) {
-    srand(time(NULL));
-    return rand() % (upper_bound_exclusive);    
-}
+int get_random_natural_number(int upper_bound_exclusive);
 
-char *merge(struct str_list *words) {
-    char *merged;
-    merged = malloc(100);
-    strcpy(merged, "");
-    
-    int i;
-    for(i = 0; i < size(words); i++) {
-        strcat(merged, get_str(words, i));
-        strcat(merged, " ");
-    }
-    
-    return merged;
-}
+char *merge(struct str_list *words);
 
 char *transform(char *sentence, int distance, struct str_list *dict_word_list) {
     char *new_sentence = sentence;
@@ -43,5 +29,29 @@ char *transform(char *sentence, int distance, struct str_list *dict_word_list) {
 	free_list(&sentence_word_list);
 	
 	return new_sentence;
+}
+
+int get_random_natural_number(int upper_bound_exclusive) {
+    if (upper_bound_exclusive < 2) {
+        printf("get_random_natural_number: upper_bound_exclusive [%d] needs to be greater than 1\n", upper_bound_exclusive);
+        exit(1);
+    }
+    
+    srand(time(NULL));
+    return rand() % (upper_bound_exclusive);    
+}
+
+char *merge(struct str_list *words) {
+    char *merged;
+    merged = malloc(100); // TODO see what this seize needs to be
+    strcpy(merged, "");
+    
+    int i;
+    for(i = 0; i < size(words); i++) {
+        strcat(merged, get_str(words, i));
+        strcat(merged, " ");
+    }
+    
+    return merged;
 }
 

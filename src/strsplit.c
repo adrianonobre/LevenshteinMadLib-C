@@ -13,17 +13,9 @@ void split(char *str, char *delim, struct str_list *out_word_list) {
 	running = strdupa(str);
 	while ((token = strsep(&running, delim)) != NULL) {
 	    if (strlen(token) > 0) {
-	        word = malloc(strlen(token) + 1);
-    	    strcpy(word, token);
-	        add_str(out_word_list, word);
+	        add_str(out_word_list, token);
 	    }
 	}
 
-	
-    int i;
-    for(i = 0; i < size(out_word_list); i++) {
-        //printf("%s ", get_str(out_word_list, i));
-    }
-	
     free(running);
 }
