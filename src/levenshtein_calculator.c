@@ -1,6 +1,8 @@
 #include <string.h>
 #include <stdio.h>
 
+int min(int e1, int e2, int e3);
+
 int get_distance(char *source, char *target) {
 
     // for all i and j, d[i,j] will hold the Levenshtein distance between
@@ -46,7 +48,7 @@ int get_distance(char *source, char *target) {
     return d[m][n];
 }
 
-min(int e1, int e2, int e3) {
+int min(int e1, int e2, int e3) {
 	if (e1 < e2 && e1 < e3) {
 		return e1;
 	} else if (e2 < e1 && e2 < e3) {

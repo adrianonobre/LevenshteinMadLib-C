@@ -55,7 +55,7 @@ char *transform_word(char *word, int distance, str_list *dict_word_list) {
 }
 
 int get_random_natural_number(int upper_bound_exclusive) {
-    if (!upper_bound_exclusive > 0) {
+    if (!(upper_bound_exclusive > 0)) {
         printf("get_random_natural_number: upper_bound_exclusive [%d] needs to be greater than 0\n", upper_bound_exclusive);
         exit(1);
     }

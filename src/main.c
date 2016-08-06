@@ -5,6 +5,7 @@
 #include "../include/str_list.h"
 #include "../include/word_file_loader.h"
 #include "../include/levenshtein_madlib.h"
+#include "../include/splash_screen.h"
 
 #define MAX_SENTENCE_LENGTH 1000
 
