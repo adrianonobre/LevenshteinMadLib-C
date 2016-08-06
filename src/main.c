@@ -12,7 +12,13 @@
 int main() {
     str_list dict_word_list;
 	init(&dict_word_list, 100000);
-	load_lines_from_file("W", &dict_word_list);
+	int success = load_lines_from_file("W", &dict_word_list);
+    if (!success) {
+        free_list(&dict_word_list);
+        printf("Make sure file a non-empty word file 'W' exists in the current directory\n");
+        return -1;
+    }
+    
 	
     show_title();
 
