@@ -14,7 +14,6 @@ OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 $(ODIR)/%.o: $(SRC_DIR)/%.c $(DEPS) | object_dir
 	$(CC) -c -o $@ $< $(CFLAGS)
-	lmkdir -p $(ODIR)
 
 madlib: $(OBJ) | build_dir
 	$(CC) -o $(BUILD_DIR)/$@ $^ $(CFLAGS)
@@ -25,9 +24,9 @@ clean:
 	rm -f $(ODIR)/*.o *~ $(IDIR)/*~ $(BUILD_DIR)/madlib
 
 object_dir:
-        mkdir -p $(ODIR)
+	mkdir -p $(ODIR)
 
 build_dir:
-        mkdir -p $(BUILD_DIR)
+	mkdir -p $(BUILD_DIR)
 
 
